@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/main_menu">
+
+    <fragment
+        android:id="@+id/main_menu"
+        android:name="com.semenchuk.junior.test.work.findthesameones.presentation.ui.main_menu.MainMenuFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_main_menu_to_game_scene"
+            app:destination="@id/game_scene" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/game_scene"
+        android:name="com.semenchuk.junior.test.work.findthesameones.presentation.ui.game_scene.GameSceneFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_game_scene" >
+        <action
+            android:id="@+id/action_game_scene_to_end_game"
+            app:destination="@id/end_game" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/end_game"
+        android:name="com.semenchuk.junior.test.work.findthesameones.presentation.ui.end_game.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>
