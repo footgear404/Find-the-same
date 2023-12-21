@@ -12,7 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainMenuFragment : BaseFragment<FragmentMainMenuBinding>() {
 
-    private val viewModel by viewModel<MainMenuViewModel>()
+    private val mainMenuViewModel by viewModel<MainMenuViewModel>()
 
     override fun initBinding(inflater: LayoutInflater): FragmentMainMenuBinding =
         FragmentMainMenuBinding.inflate(inflater)
@@ -21,7 +21,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.coins.collect { coinsCount ->
+            mainMenuViewModel.coins.collect { coinsCount ->
                 binding.coinsView.coinsCount.text = coinsCount.toString()
             }
         }

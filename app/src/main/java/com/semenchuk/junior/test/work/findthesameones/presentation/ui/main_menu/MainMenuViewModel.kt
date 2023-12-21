@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class MainMenuViewModel(
-    private val coinsHandler: CoinsHandler,
+    coinsHandler: CoinsHandler,
 ) : ViewModel() {
     private var _coins = MutableStateFlow<Int>(0)
     val coins get() = _coins.asStateFlow()

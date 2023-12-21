@@ -7,6 +7,7 @@
     tools:context=".presentation.ui.game_scene.GameSceneFragment">
 
     <include
+        android:id="@+id/timer_view"
         layout="@layout/view_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
