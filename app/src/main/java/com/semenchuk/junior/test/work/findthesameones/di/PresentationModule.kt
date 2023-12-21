@@ -1,6 +1,8 @@
 package com.semenchuk.junior.test.work.findthesameones.di
 
+import com.semenchuk.junior.test.work.findthesameones.domain.CardsHandler
 import com.semenchuk.junior.test.work.findthesameones.domain.CoinsHandler
+import com.semenchuk.junior.test.work.findthesameones.domain.GameStateHandler
 import com.semenchuk.junior.test.work.findthesameones.presentation.ui.game_scene.GameSceneViewModel
 import com.semenchuk.junior.test.work.findthesameones.presentation.ui.main_menu.MainMenuViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -14,6 +16,10 @@ val presentationModule = module {
     }
 
     viewModel<GameSceneViewModel> {
-        GameSceneViewModel(coinsHandler = get<CoinsHandler>())
+        GameSceneViewModel(
+            coinsHandler = get<CoinsHandler>(),
+            cardsHandler = get<CardsHandler>(),
+            gameStateHandler = get<GameStateHandler>()
+        )
     }
 }
