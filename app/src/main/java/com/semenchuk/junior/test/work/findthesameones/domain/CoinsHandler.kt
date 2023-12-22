@@ -17,14 +17,14 @@ class CoinsHandler(
             timeInSeconds <= TIME_THRESHOLD -> MAX_REWARD
             else -> maxOf(MIN_REWARD, MAX_REWARD - (timeInSeconds - TIME_THRESHOLD) * PENALTY)
         }
-        return coinsRepository.updateCoins(rewardCoins)
+        return rewardCoins
     }
 
     fun update(coins: Int): Int {
         return coinsRepository.updateCoins(coins)
     }
 
-    fun reset() {
-        coinsRepository.resetCoins()
+    fun reset(): Int {
+        return coinsRepository.resetCoins()
     }
 }

@@ -6,6 +6,7 @@ import com.semenchuk.junior.test.work.findthesameones.domain.CoinsHandler
 import com.semenchuk.junior.test.work.findthesameones.domain.GameStateHandler
 import com.semenchuk.junior.test.work.findthesameones.domain.State
 import com.semenchuk.junior.test.work.findthesameones.presentation.models.Card
+import com.semenchuk.junior.test.work.findthesameones.utils.GameConstants.MAX_REWARD
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -16,8 +17,8 @@ class GameSceneViewModel(
 ) : ViewModel() {
 
     private var _timer = MutableStateFlow<Int?>(null)
-    private var _coins = MutableStateFlow<Int?>(null)
-    private var _currentReward = MutableStateFlow<Int?>(null)
+    private var _coins = MutableStateFlow(MAX_REWARD)
+    private var _currentReward = MutableStateFlow(MAX_REWARD)
     private var _cards = MutableStateFlow<List<Card>>(emptyList())
     private var _gameState = MutableStateFlow<State>(State.AWAIT)
     val timer get() = _timer.asStateFlow()
@@ -35,8 +36,12 @@ class GameSceneViewModel(
         _timer.value = timeInSeconds
     }
 
-    fun takeReward(timeInSeconds: Int) {
+    fun calculateReward(timeInSeconds: Int) {
         _currentReward.value = coinsHandler.getReward(timeInSeconds)
+    }
+
+    fun saveReward(coins: Int) {
+        coinsHandler.update(coins)
     }
 
     fun flipCard(cardPosition: Int): Int {

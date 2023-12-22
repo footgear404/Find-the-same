@@ -23,7 +23,7 @@
         android:text="@string/timer_tip_text" />
 
     <include
-        android:id="@+id/reward_view"
+        android:id="@+id/coins_storage_view"
         layout="@layout/view_coins_reward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

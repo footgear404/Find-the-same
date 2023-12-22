@@ -1,11 +1,14 @@
 package com.semenchuk.junior.test.work.findthesameones.presentation.ui.game_scene
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import com.semenchuk.junior.test.work.findthesameones.databinding.FragmentGameSceneBinding
-import com.semenchuk.junior.test.work.findthesameones.domain.State
+import com.semenchuk.junior.test.work.findthesameones.domain.State.AWAIT
+import com.semenchuk.junior.test.work.findthesameones.domain.State.PROGRESS
+import com.semenchuk.junior.test.work.findthesameones.domain.State.WIN
 import com.semenchuk.junior.test.work.findthesameones.presentation.ui.BaseFragment
 import com.semenchuk.junior.test.work.findthesameones.presentation.ui.game_scene.adapter.GameFieldAdapter
 import com.semenchuk.junior.test.work.findthesameones.utils.timeInSeconds
@@ -22,54 +25,56 @@ class GameSceneFragment : BaseFragment<FragmentGameSceneBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        flowObserver(gameSceneViewModel.gameState) {
-            Log.d("STATE", "state: ${it.javaClass.name}")
-            when (it) {
-                State.AWAIT -> initGameField()
-                State.PROGRESS -> startGame()
-                State.WIN -> {
-//                    binding.timerView.timer.stop()
-                    gameSceneViewModel.takeReward(
-                        timeInSeconds = gameSceneViewModel.timer.value ?: 0
-                    )
+        flowObserver(gameSceneViewModel.currentReward) { reward ->
+            binding.coinsStorageView.coinsCount.text =
+                gameSceneViewModel.currentReward.value.toString()
+            Log.d("REWARD", "reward: $reward")
+        }
+
+        flowObserver(gameSceneViewModel.gameState) { state ->
+            when (state) {
+                AWAIT -> {
+                    initGameField()
+                    initTimer()
                 }
-            }
-        }
 
-        flowObserver(gameSceneViewModel.cards) { cardList ->
-            gameFieldAdapter.submitData(data = cardList)
-        }
-
-        flowObserver(gameSceneViewModel.timer) { timeInSeconds ->
-            timeInSeconds.let {
-                Log.d("TIMER", "timer: $it")
+                PROGRESS -> startGame()
+                WIN -> stopGame()
             }
+            Log.d("STATE", "state: ${state.javaClass.name}")
         }
+    }
 
-        flowObserver(gameSceneViewModel.coins) { coins ->
-            coins.let { value ->
-                Log.d("COINS", "coins: $value")
-                snack("You are won! Reward $value", binding.root)
-            }
-        }
+    private fun startGame() {
+        binding.timerView.timer.start()
+        binding.timerView.timer.base = SystemClock.elapsedRealtime()
+    }
 
-        flowObserver(gameSceneViewModel.currentReward) { currentReward ->
-            currentReward.let {value ->
-                binding.rewardView.coinsCount.text = value.toString()
-                Log.d("REWARD", "reward: $value")
-            }
-        }
+    private fun stopGame() {
+        binding.timerView.timer.stop()
+        val reward = gameSceneViewModel.currentReward.value
+        gameSceneViewModel.saveReward(reward)
+        snack("You are won! Reward $reward", binding.root)
     }
 
     private fun initGameField() {
         binding.gameField.adapter = gameFieldAdapter
+        flowObserver(gameSceneViewModel.cards) { cardList ->
+            gameFieldAdapter.submitData(data = cardList)
+        }
     }
 
-    private fun startGame() {
+    private fun initTimer() {
         binding.timerView.timer.setOnChronometerTickListener { chronometer ->
             gameSceneViewModel.setTime(timeInSeconds = chronometer.timeInSeconds())
         }
-        binding.timerView.timer.start()
+
+        flowObserver(gameSceneViewModel.timer) { timeInSeconds ->
+            Log.d("TIMER", "timer: $timeInSeconds")
+            gameSceneViewModel.calculateReward(
+                timeInSeconds = gameSceneViewModel.timer.value ?: 0
+            )
+        }
     }
 
     private fun onCellClickListener(position: Int) {

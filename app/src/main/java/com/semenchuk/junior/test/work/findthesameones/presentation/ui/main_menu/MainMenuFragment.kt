@@ -1,6 +1,7 @@
 package com.semenchuk.junior.test.work.findthesameones.presentation.ui.main_menu
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +24,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             mainMenuViewModel.coins.collect { coinsCount ->
                 binding.coinsView.coinsCount.text = coinsCount.toString()
+                Log.d("TAG", "coinsCount: $coinsCount")
             }
         }
 
@@ -33,6 +35,14 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding>() {
             btnSafe.setOnClickListener {
                 snack(getString(R.string.safe_btn_message), it)
             }
+
+            coinsView.coinImg.setOnClickListener {
+                mainMenuViewModel.resetCoins()
+            }
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        mainMenuViewModel.updateCoinsView()
     }
 }

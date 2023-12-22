@@ -37,13 +37,13 @@ class CardRepositoryImpl : CardRepository {
 
     companion object {
         val availableImages = listOf(
-            R.drawable.ci_1_bag,
-            R.drawable.ci_2_book,
-            R.drawable.ci_3_compass,
-            R.drawable.ci_4_helmet,
+            R.drawable.ci_15_compass,
+            R.drawable.ci_11_scull,
+            R.drawable.ci_14_sword,
+            R.drawable.ci_13_scroll,
             R.drawable.ci_5_poison,
             R.drawable.ci_6_potion,
-            R.drawable.ci_7_smoke_pipe,
+            R.drawable.ci_12_coin,
             R.drawable.ci_8_soup_bowl,
             R.drawable.ci_9_tankard,
             R.drawable.ci_10_treasure_chest,

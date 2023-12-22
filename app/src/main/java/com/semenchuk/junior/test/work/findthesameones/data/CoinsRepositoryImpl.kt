@@ -1,25 +1,27 @@
 package com.semenchuk.junior.test.work.findthesameones.data
 
+import com.semenchuk.junior.test.work.findthesameones.data.storage.AppStorage
 import com.semenchuk.junior.test.work.findthesameones.domain.CoinsRepository
 
-class CoinsRepositoryImpl : CoinsRepository {
-
-    private var availableCoins = START_COINS
+class CoinsRepositoryImpl(
+    private val appStorage: AppStorage,
+) : CoinsRepository {
 
     override fun getCoins(): Int {
-        return availableCoins
+        return appStorage.availableCoins
     }
 
     override fun updateCoins(coins: Int): Int {
-        availableCoins += coins
-        return availableCoins
+        appStorage.availableCoins += coins
+        return appStorage.availableCoins
     }
 
-    override fun resetCoins() {
-        availableCoins = START_COINS
+    override fun resetCoins(): Int {
+        appStorage.availableCoins = START_COINS
+        return appStorage.availableCoins
     }
 
     companion object {
-        const val START_COINS = 100
+        const val START_COINS = 0
     }
 }
