@@ -5,8 +5,8 @@ import android.content.SharedPreferences
 import com.semenchuk.junior.test.work.findthesameones.data.CardRepositoryImpl
 import com.semenchuk.junior.test.work.findthesameones.data.CoinsRepositoryImpl
 import com.semenchuk.junior.test.work.findthesameones.data.storage.AppStorage
-import com.semenchuk.junior.test.work.findthesameones.domain.CardRepository
-import com.semenchuk.junior.test.work.findthesameones.domain.CoinsRepository
+import com.semenchuk.junior.test.work.findthesameones.domain.interfaces.CardRepository
+import com.semenchuk.junior.test.work.findthesameones.domain.interfaces.CoinsRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

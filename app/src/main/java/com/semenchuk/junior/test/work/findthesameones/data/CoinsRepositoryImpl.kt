@@ -1,7 +1,7 @@
 package com.semenchuk.junior.test.work.findthesameones.data
 
 import com.semenchuk.junior.test.work.findthesameones.data.storage.AppStorage
-import com.semenchuk.junior.test.work.findthesameones.domain.CoinsRepository
+import com.semenchuk.junior.test.work.findthesameones.domain.interfaces.CoinsRepository
 
 class CoinsRepositoryImpl(
     private val appStorage: AppStorage,

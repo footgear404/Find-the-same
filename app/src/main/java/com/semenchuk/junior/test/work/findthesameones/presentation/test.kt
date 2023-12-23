@@ -6,11 +6,12 @@ import com.semenchuk.junior.test.work.findthesameones.presentation.models.Card
 
 fun main() {
 
-    val allCards = mutableListOf<Card>()
+    var allCards = mutableListOf<Card>()
 
     for (imageResource in CardRepositoryImpl.availableImages) {
-        for (i in 1..2) {
-            allCards.add(Card(id = imageResource, isFlipped = false))
+
+        for (i in 0..1) {
+            allCards.add(Card(id = imageResource, isFlipped = false, copy = i))
         }
     }
 
@@ -28,12 +29,8 @@ fun main() {
     )
 
     for (i in allCards) {
-        println(i.id)
+        val x = allCards.indexOf(i)
+        println("${i.hashCode()} : $x")
     }
 
-    println("-------------------------------")
-
-    for (i in allCards.shuffled()) {
-        println(i.id)
-    }
 }

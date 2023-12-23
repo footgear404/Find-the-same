@@ -1,14 +1,14 @@
 package com.semenchuk.junior.test.work.findthesameones
 
 import com.semenchuk.junior.test.work.findthesameones.domain.CoinsHandler
-import com.semenchuk.junior.test.work.findthesameones.domain.CoinsRepository
+import com.semenchuk.junior.test.work.findthesameones.domain.interfaces.CoinsRepository
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 class CoinsRepositoryTest : CoinsRepository {
     override fun getCoins(): Int = 0
     override fun updateCoins(coins: Int): Int = 0
-    override fun resetCoins() = Unit
+    override fun resetCoins(): Int = 0
 }
 
 class RewardCalculatorTest {

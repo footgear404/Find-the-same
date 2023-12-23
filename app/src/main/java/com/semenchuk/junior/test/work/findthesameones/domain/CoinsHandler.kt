@@ -1,5 +1,6 @@
 package com.semenchuk.junior.test.work.findthesameones.domain
 
+import com.semenchuk.junior.test.work.findthesameones.domain.interfaces.CoinsRepository
 import com.semenchuk.junior.test.work.findthesameones.utils.GameConstants.MAX_REWARD
 import com.semenchuk.junior.test.work.findthesameones.utils.GameConstants.MIN_REWARD
 import com.semenchuk.junior.test.work.findthesameones.utils.GameConstants.PENALTY

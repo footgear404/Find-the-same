@@ -1,4 +1,4 @@
-package com.semenchuk.junior.test.work.findthesameones.domain
+package com.semenchuk.junior.test.work.findthesameones.domain.interfaces
 
 import com.semenchuk.junior.test.work.findthesameones.presentation.models.Card
 
@@ -7,5 +7,5 @@ interface CardRepository {
     var isAllFlipped: Boolean
     fun initializeCards(): List<Card>
 
-    fun flipCard(position: Int): Int
+    fun update(cards: List<Card>): List<Card>
 }

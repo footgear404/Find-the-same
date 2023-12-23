@@ -1,5 +1,6 @@
 package com.semenchuk.junior.test.work.findthesameones.domain
 
+import com.semenchuk.junior.test.work.findthesameones.domain.interfaces.CardRepository
 import com.semenchuk.junior.test.work.findthesameones.presentation.models.Card
 
 class CardsHandler(
@@ -10,7 +11,8 @@ class CardsHandler(
         return cardRepository.initializeCards()
     }
 
-    fun flip(position: Int): Int {
-        return cardRepository.flipCard(position)
+    fun update(cards: List<Card>): List<Card> {
+        return cardRepository.update(cards)
     }
+
 }

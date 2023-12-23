@@ -1,5 +1,7 @@
 package com.semenchuk.junior.test.work.findthesameones.domain
 
+import com.semenchuk.junior.test.work.findthesameones.domain.interfaces.CardRepository
+
 class GameStateHandler(
     private val cardRepository: CardRepository,
 ) {

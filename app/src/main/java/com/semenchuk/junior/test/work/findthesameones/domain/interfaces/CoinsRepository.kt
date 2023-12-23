@@ -1,4 +1,4 @@
-package com.semenchuk.junior.test.work.findthesameones.domain
+package com.semenchuk.junior.test.work.findthesameones.domain.interfaces
 
 interface CoinsRepository {
     fun getCoins(): Int
